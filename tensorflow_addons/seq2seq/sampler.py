@@ -217,7 +217,7 @@ class TrainingSampler(Sampler):
             the timestep dimension (usually the second dim of the input).
         """
         self.inputs = tf.convert_to_tensor(inputs, name="inputs")
-        if self.time_major:
+        if not self.time_major:
             inputs = tf.nest.map_structure(_transpose_batch_time, inputs)
 
         self._batch_size = tf.shape(tf.nest.flatten(inputs)[0])[1]
